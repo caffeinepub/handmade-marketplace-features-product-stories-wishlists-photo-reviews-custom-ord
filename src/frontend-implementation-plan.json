@@ -1,0 +1,89 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Stabilize frontend build and add resilient error handling for backend call failures",
+  "requirements": [
+    {
+      "id": "REQ-11",
+      "summary": "Resolve frontend build/deploy blockers by ensuring all imported frontend entry files exist and compile cleanly.",
+      "acceptanceCriteria": [
+        "A clean build completes for both frontend and backend without errors.",
+        "Canister deployment completes successfully (no generic deployment failure).",
+        "If any issues were fixed, they are reflected in code changes rather than manual-only steps."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "create",
+          "description": "Create/restore the App entry component imported by frontend/src/main.tsx, ensuring it compiles and mounts the app shell without relying on immutable hook edits."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "create",
+          "description": "Create/restore the global stylesheet imported by frontend/src/main.tsx to eliminate missing-asset build failures and provide baseline styling compatible with existing Tailwind/shadcn setup."
+        },
+        {
+          "path": "frontend/src/components/AppErrorBoundary.tsx",
+          "operation": "create",
+          "description": "Add a lightweight React error boundary to prevent runtime render crashes from surfacing as blank screens and to help diagnose build/runtime regressions."
+        }
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "summary": "Add a user-visible, reusable error surface for failed backend calls with clear messages and retry for query-based data loads.",
+      "acceptanceCriteria": [
+        "When a backend request fails, the UI displays a readable English error state instead of silently failing or breaking layout.",
+        "Where data is query-based, a retry action is available and triggers a refetch.",
+        "Error states do not require modifying any immutable frontend paths (hooks or UI component sources)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/BackendErrorNotice.tsx",
+          "operation": "create",
+          "description": "Create a composable error notice component that renders a plain-English message plus an optional Retry action; do not edit any files under frontend/src/components/ui. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/utils/backendError.ts",
+          "operation": "create",
+          "description": "Add a small utility to normalize unknown thrown values and backend-provided error strings into user-friendly English messages (including auth-required messaging when appropriate)."
+        },
+        {
+          "path": "frontend/src/api/useSafeQuery.ts",
+          "operation": "create",
+          "description": "Create a wrapper hook around @tanstack/react-query to standardize error-state rendering inputs (message + retry/refetch handler) without modifying immutable hooks. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire the new BackendErrorNotice into core data-loading views rendered by App (or the app shell it composes) so failed backend calls show a clear message and a Retry action where applicable."
+        }
+      ]
+    },
+    {
+      "id": "REQ-14",
+      "summary": "Eliminate frontend↔backend shape/type mismatches by adding a normalization layer for core marketplace entities and using it for rendering and submissions.",
+      "acceptanceCriteria": [
+        "Frontend loads and renders core data (categories, product lists, product detail story sections, shop announcement banner) without console errors related to decoding/shape mismatch.",
+        "Submitting a wishlist action, a review, and a custom order request succeeds end-to-end when signed in, and returns a clear error when signed out (per existing gating)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/api/backendAdapters.ts",
+          "operation": "create",
+          "description": "Create adapter/normalizer functions for Shops, Products (including optional story fields), Categories, Announcements, Wishlist entries, Reviews (including photo fields), and CustomOrderRequests to enforce consistent optional/required handling before UI use."
+        },
+        {
+          "path": "frontend/src/api/backendCalls.ts",
+          "operation": "create",
+          "description": "Add typed call helpers that wrap actor calls (queries and updates) to apply adapters, surface structured error strings, and interoperate cleanly with the error UI layer; avoid changes to immutable hooks."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Update the app shell views to consume normalized data from the adapter/call helpers (categories, product lists, product story rendering, shop announcements) and to route failures through the BackendErrorNotice without console shape/serialization errors."
+        }
+      ]
+    }
+  ]
+}

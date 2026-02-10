@@ -1,0 +1,104 @@
+{
+  "kind": "build_request",
+  "title": "Mini update: fix deployment failures and stabilize build",
+  "priority": "high",
+  "requirements": [
+    {
+      "id": "REQ-11",
+      "text": "Identify and fix the underlying cause(s) of the current deployment failure (generic “Deployment ran into an issue”) by performing a full build + deploy pass and resolving any Motoko compilation errors, frontend TypeScript/build errors, or canister deployment configuration issues that prevent successful deployment.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Fix all issues bugs and errors!",
+          "I just want you to go back into the code and fix all bugs errors and issues as a small mini update!",
+          "I'm ready build it"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A clean build completes for both frontend and backend without errors.",
+        "Canister deployment completes successfully (no generic deployment failure).",
+        "If any issues were fixed, they are reflected in code changes rather than manual-only steps."
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "text": "Add an explicit, user-visible error reporting surface in the frontend for failed backend calls (e.g., load products/categories/shop data, wishlist actions, review submission, custom order submission), showing a clear English error message and a lightweight “Retry” action where appropriate.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Fix all issues bugs and errors!"
+        ]
+      },
+      "acceptanceCriteria": [
+        "When a backend request fails, the UI displays a readable English error state instead of silently failing or breaking layout.",
+        "Where data is query-based, a retry action is available and triggers a refetch.",
+        "Error states do not require modifying any immutable frontend paths (hooks or UI component sources)."
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "text": "Harden backend error handling for all update calls related to marketplace user-generated actions (favorites, reviews with photo uploads, custom order requests) so that failures return structured, actionable errors rather than trapping; ensure unauthenticated calls return clear errors consistent with the existing authentication gating behavior.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Fix all issues bugs and errors!"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend update methods do not trap on common invalid inputs and instead return a clear error result.",
+        "Unauthenticated attempts to perform gated actions consistently return an authentication-required error result.",
+        "Frontend can display backend error messages without crashing."
+      ]
+    },
+    {
+      "id": "REQ-14",
+      "text": "Run a consistency pass across frontend↔backend interfaces (types, field names, optional vs required fields) for core marketplace entities (shops, products with story fields, categories, shop announcements, wishlist entries, reviews, custom order requests) and fix any mismatches that would cause runtime errors or failed serialization/deserialization.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Fix all issues bugs and errors!"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Frontend loads and renders core data (categories, product lists, product detail story sections, shop announcement banner) without console errors related to decoding/shape mismatch.",
+        "Submitting a wishlist action, a review, and a custom order request succeeds end-to-end when signed in, and returns a clear error when signed out (per existing gating)."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not modify files under frontend/src/components/ui (they must be composed, not edited).",
+    "Do not edit immutable frontend paths: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx.",
+    "Backend must remain a single Motoko actor with all logic in backend/main.mo; add backend/migration.mo only if an upgrade/state migration is actually needed."
+  ],
+  "nonGoals": [
+    "Adding new product features beyond bug fixes and stability improvements.",
+    "Integrating third-party authentication providers or external databases/logging services.",
+    "Adding real-time features (WebSockets/push notifications)."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

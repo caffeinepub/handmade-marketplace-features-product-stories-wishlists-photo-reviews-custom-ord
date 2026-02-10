@@ -1,0 +1,68 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-identify-and-fix-the-underlying-cause-s-of-the-current-deployment-failure-generic-deployment-ran-into-an-issue-by-performing-a-full-build-deploy-pass-and-resolving-any-motoko-compilation-errors-frontend-typescript-build-errors-or-canister-deployment-configuration-issues-that-prevent-successful-deployment",
+      "featureTitle": "Identify and fix the underlying cause(s) of the current deployment failure (generic “Deployment ran into an issue”) by performing a full build + deploy pass and resolving any Motoko compilation errors, frontend TypeScript/build errors, or canister deployment configuration issues that prevent successful deployment.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/AppErrorBoundary.tsx",
+        "frontend/src/index.css"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-11"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-an-explicit-user-visible-error-reporting-surface-in-the-frontend-for-failed-backend-calls-e-g-load-products-categories-shop-data-wishlist-actions-review-submission-custom-order-submission-showing-a-clear-english-error-message-and-a-lightweight-retry-action-where-appropriate",
+      "featureTitle": "Add an explicit, user-visible error reporting surface in the frontend for failed backend calls (e.g., load products/categories/shop data, wishlist actions, review submission, custom order submission), showing a clear English error message and a lightweight “Retry” action where appropriate.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/BackendErrorNotice.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-12"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-run-a-consistency-pass-across-frontend-backend-interfaces-types-field-names-optional-vs-required-fields-for-core-marketplace-entities-shops-products-with-story-fields-categories-shop-announcements-wishlist-entries-reviews-custom-order-requests-and-fix-any-mismatches-that-would-cause-runtime-errors-or-failed-serialization-deserialization",
+      "featureTitle": "Run a consistency pass across frontend↔backend interfaces (types, field names, optional vs required fields) for core marketplace entities (shops, products with story fields, categories, shop announcements, wishlist entries, reviews, custom order requests) and fix any mismatches that would cause runtime errors or failed serialization/deserialization.",
+      "files": [
+        "frontend/src/App.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-14"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

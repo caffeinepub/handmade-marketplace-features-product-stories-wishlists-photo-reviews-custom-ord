@@ -1,0 +1,20 @@
+{
+  "frontend/src/App.tsx": "Main application component with router setup, authentication flow, profile setup modal, and theme provider integration.",
+  "frontend/src/hooks/useQueries.ts": "React Query hooks for all backend operations including products, categories, shops, reviews, wishlist, and custom orders with proper error handling.",
+  "frontend/src/components/Header.tsx": "Application header with navigation, login/logout functionality, and wishlist link for authenticated users.",
+  "frontend/src/components/Footer.tsx": "Application footer with copyright notice and Caffeine.ai attribution with proper UTM tracking.",
+  "frontend/src/components/ProfileSetupModal.tsx": "Modal dialog for first-time user profile setup requiring name input after authentication.",
+  "frontend/src/components/AppErrorBoundary.tsx": "React error boundary component to catch and display runtime errors gracefully.",
+  "frontend/src/components/BackendErrorNotice.tsx": "Reusable error display component with optional retry action for backend call failures.",
+  "frontend/src/pages/HomePage.tsx": "Home page displaying hero section, category browsing, featured products, and featured shops with loading states and error handling.",
+  "frontend/src/pages/CategoryPage.tsx": "Category detail page showing all products within a specific category with proper filtering.",
+  "frontend/src/pages/ProductDetailPage.tsx": "Product detail page with image, description, story section, wishlist toggle, custom order button, shop link, and reviews.",
+  "frontend/src/pages/ShopPage.tsx": "Shop page displaying shop information, announcements banner, and all products from that shop.",
+  "frontend/src/pages/WishlistPage.tsx": "Wishlist page showing saved products for authenticated users with login prompt for guests.",
+  "frontend/src/components/ProductCard.tsx": "Reusable product card component with image, name, price, tags, and optional wishlist removal.",
+  "frontend/src/components/CategoryCard.tsx": "Simple category card component linking to category detail pages.",
+  "frontend/src/components/ReviewSection.tsx": "Review section with review form, star ratings, review list, and photo display for product pages.",
+  "frontend/src/components/CustomOrderButton.tsx": "Button and dialog for submitting custom order requests to shops with authentication check.",
+  "frontend/src/index.css": "Global styles with warm, handmade-marketplace OKLCH color system for light and dark modes.",
+  "frontend/tailwind.config.js": "Tailwind configuration with custom color tokens, Inter font family, and extended design system."
+}

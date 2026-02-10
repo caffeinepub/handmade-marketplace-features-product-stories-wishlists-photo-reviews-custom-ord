@@ -1,0 +1,168 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 5,
+  "summary": "Handmade marketplace website focused on community, personalization, and artisan shop experiences, including product storytelling, wishlists, photo reviews, custom commissions, shop announcements, and intuitive category browsing.",
+  "architectural_notes": [
+    "All requested marketplace features must be fully functional and seamlessly integrated across product and shop pages."
+  ],
+  "known_issues": [
+    "Deployment is failing with a generic \"Deployment ran into an issue\" message; specific error output/stack trace not yet captured from build/deploy logs."
+  ],
+  "isFixRequest": true,
+  "existing_features": [
+    {
+      "id": "feature-add-authentication-gating-for-user-generated-actions-favorites-reviews-custom-order-requests-using-the-existing-internet-identity-integration-unauthenticated-visitors-can-browse-but-are-prompted-to-sign-in-to-save-favorites-post-reviews-upload-photos-or-submit-custom-order-requests",
+      "title": "Add authentication gating for user-generated actions (favorites, reviews, custom order requests) using the existing Internet Identity integration; unauthenticated visitors can browse but are prompted to sign in to save favorites, post reviews, upload photos, or submit custom order requests.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-intuitive-category-browsing-ui-a-categories-index-e-g-stickers-crafts-commissions-etc-category-detail-pages-listing-products-and-category-filters-links-that-are-reachable-from-primary-navigation-and-product-shop-pages",
+      "title": "Create intuitive category browsing UI: a categories index (e.g., Stickers, Crafts, Commissions, etc.), category detail pages listing products, and category filters/links that are reachable from primary navigation and product/shop pages.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-product-detail-pages-that-prominently-include-dedicated-story-sections-an-about-this-item-section-and-a-creator-notes-section-alongside-standard-commerce-style-information-title-price-images-category",
+      "title": "Build product detail pages that prominently include dedicated story sections: an “About this item” section and a “Creator notes” section, alongside standard commerce-style information (title, price, images, category).",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-favorites-wishlist-system-end-to-end-allow-signed-in-users-to-save-unsave-products-provide-a-dedicated-wishlist-page-showing-saved-items-for-easy-return-visits",
+      "title": "Implement a favorites/wishlist system end-to-end: allow signed-in users to save/unsave products; provide a dedicated Wishlist page showing saved items for easy return visits.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-customer-reviews-with-photo-uploads-users-can-leave-a-rating-and-text-review-on-a-product-and-upload-one-or-more-photos-with-the-review-display-reviews-and-review-photo-galleries-on-product-pages",
+      "title": "Implement customer reviews with photo uploads: users can leave a rating and text review on a product, and upload one or more photos with the review; display reviews and review photo galleries on product pages.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-clearly-visible-custom-order-request-button-on-both-product-pages-and-shop-pages-implement-a-custom-order-request-form-that-captures-commission-details-message-description-budget-range-optional-desired-timeline-optional-reference-links-files-optional-and-submits-to-the-backend",
+      "title": "Add a clearly visible custom order request button on both product pages and shop pages; implement a custom order request form that captures commission details (message/description, budget range optional, desired timeline optional, reference links/files optional) and submits to the backend.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-shop-pages-with-a-shop-announcement-banner-that-the-creator-can-update-to-post-updates-restocks-and-new-product-drops-ensure-announcements-are-displayed-prominently-to-visitors-and-manageable-by-the-shop-owner",
+      "title": "Implement shop pages with a shop announcement banner that the creator can update to post updates, restocks, and new product drops; ensure announcements are displayed prominently to visitors and manageable by the shop owner.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-cohesive-handmade-marketplace-visual-theme-across-the-ui-colors-typography-spacing-components-that-emphasizes-warmth-and-craftsmanship-avoid-blue-purple-defaults-and-ensure-consistent-styling-across-home-category-product-shop-wishlist-and-forms",
+      "title": "Apply a cohesive, handmade-marketplace visual theme across the UI (colors, typography, spacing, components) that emphasizes warmth and craftsmanship (avoid blue/purple defaults), and ensure consistent styling across home, category, product, shop, wishlist, and forms.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-identify-and-fix-the-underlying-cause-s-of-the-current-deployment-failure-generic-deployment-ran-into-an-issue-by-performing-a-full-build-deploy-pass-and-resolving-any-motoko-compilation-errors-frontend-typescript-build-errors-or-canister-deployment-configuration-issues-that-prevent-successful-deployment",
+      "title": "Identify and fix the underlying cause(s) of the current deployment failure (generic “Deployment ran into an issue”) by performing a full build + deploy pass and resolving any Motoko compilation errors, frontend TypeScript/build errors, or canister deployment configuration issues that prevent successful deployment.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-explicit-user-visible-error-reporting-surface-in-the-frontend-for-failed-backend-calls-e-g-load-products-categories-shop-data-wishlist-actions-review-submission-custom-order-submission-showing-a-clear-english-error-message-and-a-lightweight-retry-action-where-appropriate",
+      "title": "Add an explicit, user-visible error reporting surface in the frontend for failed backend calls (e.g., load products/categories/shop data, wishlist actions, review submission, custom order submission), showing a clear English error message and a lightweight “Retry” action where appropriate.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-run-a-consistency-pass-across-frontend-backend-interfaces-types-field-names-optional-vs-required-fields-for-core-marketplace-entities-shops-products-with-story-fields-categories-shop-announcements-wishlist-entries-reviews-custom-order-requests-and-fix-any-mismatches-that-would-cause-runtime-errors-or-failed-serialization-deserialization",
+      "title": "Run a consistency pass across frontend↔backend interfaces (types, field names, optional vs required fields) for core marketplace entities (shops, products with story fields, categories, shop announcements, wishlist entries, reviews, custom order requests) and fix any mismatches that would cause runtime errors or failed serialization/deserialization.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Product pages with dedicated story sections (e.g., “About this item”) and creator notes to connect customers with makers",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Favorites / wishlist system so users can save items for return visits",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Customer reviews system with uploaded photos of purchases (photo reviews)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Custom order request flow with a clearly visible request button on product and shop pages for personalized commission requests",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Shop announcement banner for creators to post updates, restocks, and new product drops",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Intuitive category browsing for sections like stickers, crafts, commissions, and other product groupings",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Implement core data models and persistence for a handmade marketplace: Shops (creator profile), Products (with category, price, images, and story fields), Categories, Shop Announcements, Favorites/Wishlist entries, Reviews (with rating, text, and photo uploads), and Custom Order Requests (commission requests) in the Motoko backend single-actor canister.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-15",
+      "summary": "Seed the app with initial demo content (shops, categories, products with story fields, and a few reviews) so the full artisan experience is visible immediately after deployment.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-18",
+      "summary": "Harden backend error handling for all update calls related to marketplace user-generated actions (favorites, reviews with photo uploads, custom order requests) so that failures return structured, actionable errors rather than trapping; ensure unauthenticated calls return clear errors consistent with the existing authentication gating behavior.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Handmade marketplace features: product stories, wishlists, photo reviews, custom orders, shop announcements, and category browsing",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

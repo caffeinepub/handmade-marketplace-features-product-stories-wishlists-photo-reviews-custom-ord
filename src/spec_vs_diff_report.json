@@ -1,0 +1,109 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-10T00:17:59.414Z",
+  "summary": "Diff adds a large set of new frontend pages/components/hooks and a new backend Motoko actor, including UI-level error display for some query failures. However, the diff evidence does not demonstrate that the original deployment failure was diagnosed/fixed, and the backend error-handling changes appear to still use trapping (at least for auth) rather than returning structured errors for gated user actions.",
+  "missing_requirements": [
+    {
+      "id": "REQ-11",
+      "requirement": "Identify and fix the underlying cause(s) of the current deployment failure (generic “Deployment ran into an issue”) and ensure clean build + successful canister deploy via code changes.",
+      "reason": "The diff summary only shows new files added; it does not show any specific changes tied to an identified deployment/config/build failure (e.g., dfx.json/canister config fixes, dependency/version fixes, compilation error fixes). Without such evidence, successful build/deploy can’t be verified from the provided diff.",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/App.tsx",
+        "frontend/src/main.tsx"
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "requirement": "Harden backend error handling for all update calls related to marketplace user-generated actions (favorites, reviews with photo uploads, custom order requests) so failures return structured, actionable errors rather than trapping; unauthenticated calls return clear errors consistent with existing auth gating.",
+      "reason": "In the visible backend code, unauthorized access is handled via Runtime.trap(\"Unauthorized...\") rather than returning a structured error result. The diff excerpt does not show structured Result-style returns for all gated update calls, and provides direct evidence of trapping for auth failures.",
+      "evidence": [
+        "backend/main.mo (getCallerUserProfile/getUserProfile/saveCallerUserProfile use Runtime.trap(\"Unauthorized...\") in shown excerpt)"
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "requirement": "Add an explicit, user-visible error reporting surface in the frontend for failed backend calls (including wishlist actions, review submission, custom order submission), with a lightweight Retry action where appropriate.",
+      "reason": "Query-based pages do show BackendErrorNotice with Retry (e.g., HomePage/CategoryPage/ShopPage/ProductDetailPage). However, for key user actions (wishlist toggle/remove, review submit, custom order submit), the diff shows toast-based errors only, not an explicit persistent error surface component with a retry action.",
+      "evidence": [
+        "frontend/src/components/BackendErrorNotice.tsx",
+        "frontend/src/pages/HomePage.tsx",
+        "frontend/src/pages/CategoryPage.tsx",
+        "frontend/src/pages/ShopPage.tsx",
+        "frontend/src/pages/ProductDetailPage.tsx (wishlist action failures use toast)",
+        "frontend/src/components/ReviewSection.tsx (submission failures use toast)",
+        "frontend/src/components/CustomOrderButton.tsx (submission failures use toast)",
+        "frontend/src/components/ProductCard.tsx (remove wishlist failures use toast)"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "User profile management (get/save caller profile + forced profile setup modal) introduced as a new product flow.",
+      "reason": "The BuildRequest focuses on deployment/build stabilization and error handling/interface consistency; it explicitly states non-goal of adding new product features beyond bug fixes. The diff adds new profile types, profile queries/mutations, and a modal prompting users to set up a profile.",
+      "evidence": [
+        "backend/main.mo (UserProfile type; getCallerUserProfile/getUserProfile/saveCallerUserProfile)",
+        "frontend/src/components/ProfileSetupModal.tsx",
+        "frontend/src/App.tsx (showProfileSetup logic using useGetCallerUserProfile)"
+      ]
+    },
+    {
+      "description": "Marketing/footer attribution link to caffeine.ai added.",
+      "reason": "Not requested by any requirement and appears to be a new UI/branding element rather than a stability/bug-fix necessity.",
+      "evidence": [
+        "frontend/src/components/Footer.tsx"
+      ]
+    },
+    {
+      "description": "Global app-level error boundary UI (reload page screen) added.",
+      "reason": "REQ-12 asks for explicit error reporting for failed backend calls; adding an AppErrorBoundary is broader application behavior and not explicitly requested.",
+      "evidence": [
+        "frontend/src/components/AppErrorBoundary.tsx",
+        "frontend/src/App.tsx (wraps AppContent in AppErrorBoundary)"
+      ]
+    },
+    {
+      "description": "Router architecture switched/introduced using @tanstack/react-router with multiple new routes/pages.",
+      "reason": "Not requested by the BuildRequest; could be considered a larger refactor/new structure beyond targeted deployment/build stabilization and error surfacing.",
+      "evidence": [
+        "frontend/src/App.tsx (createRouter/createRoute/createRootRoute/RouterProvider setup)",
+        "frontend/src/pages/HomePage.tsx",
+        "frontend/src/pages/CategoryPage.tsx",
+        "frontend/src/pages/ProductDetailPage.tsx",
+        "frontend/src/pages/ShopPage.tsx"
+      ]
+    }
+  ],
+  "confidence": 0.66,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/components/AppErrorBoundary.tsx",
+    "frontend/src/components/BackendErrorNotice.tsx",
+    "frontend/src/components/CategoryCard.tsx",
+    "frontend/src/components/CustomOrderButton.tsx",
+    "frontend/src/components/Footer.tsx",
+    "frontend/src/components/Header.tsx",
+    "frontend/src/components/ProductCard.tsx",
+    "frontend/src/components/ProfileSetupModal.tsx",
+    "frontend/src/components/ReviewSection.tsx",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/index.css",
+    "frontend/src/main.tsx",
+    "frontend/src/pages/CategoryPage.tsx",
+    "frontend/src/pages/HomePage.tsx",
+    "frontend/src/pages/ProductDetailPage.tsx",
+    "frontend/src/pages/ShopPage.tsx",
+    "frontend/src/pages/WishlistPage.tsx",
+    "frontend/src/utils/urlParams.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}
